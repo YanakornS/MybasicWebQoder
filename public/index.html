@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration | MyBasicWebQoder</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-user-plus"></i>
+                <h1>Create Account</h1>
+            </div>
+            <p class="subtitle">Join our community today</p>
+        </div>
+
+        <form id="registrationForm" class="registration-form">
+            <div class="form-group">
+                <label for="name">
+                    <i class="fas fa-user"></i>
+                    Full Name
+                </label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    placeholder="Enter your full name"
+                    required
+                >
+                <span class="error-message" id="nameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">
+                    <i class="fas fa-venus-mars"></i>
+                    Gender
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">
+                            <i class="fas fa-mars"></i>
+                            Male
+                        </label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="female" name="gender" value="female" required>
+                        <label for="female">
+                            <i class="fas fa-venus"></i>
+                            Female
+                        </label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="other" name="gender" value="other" required>
+                        <label for="other">
+                            <i class="fas fa-genderless"></i>
+                            Other
+                        </label>
+                    </div>
+                </div>
+                <span class="error-message" id="genderError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">
+                    <i class="fas fa-envelope"></i>
+                    Email Address
+                </label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="your.email@example.com"
+                    required
+                >
+                <span class="error-message" id="emailError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="country">
+                    <i class="fas fa-globe"></i>
+                    Country
+                </label>
+                <select id="country" name="country" required>
+                    <option value="">Select your country</option>
+                    <option value="Thailand">🇹🇭 Thailand</option>
+                    <option value="United States">🇺🇸 United States</option>
+                    <option value="United Kingdom">🇬🇧 United Kingdom</option>
+                    <option value="Japan">🇯🇵 Japan</option>
+                    <option value="South Korea">🇰🇷 South Korea</option>
+                    <option value="Singapore">🇸🇬 Singapore</option>
+                    <option value="Malaysia">🇲🇾 Malaysia</option>
+                    <option value="Philippines">🇵🇭 Philippines</option>
+                    <option value="Indonesia">🇮🇩 Indonesia</option>
+                    <option value="Vietnam">🇻🇳 Vietnam</option>
+                    <option value="China">🇨🇳 China</option>
+                    <option value="Australia">🇦🇺 Australia</option>
+                    <option value="Canada">🇨🇦 Canada</option>
+                    <option value="Germany">🇩🇪 Germany</option>
+                    <option value="France">🇫🇷 France</option>
+                    <option value="Italy">🇮🇹 Italy</option>
+                    <option value="Spain">🇪🇸 Spain</option>
+                    <option value="Netherlands">🇳🇱 Netherlands</option>
+                    <option value="Sweden">🇸🇪 Sweden</option>
+                    <option value="Norway">🇳🇴 Norway</option>
+                    <option value="India">🇮🇳 India</option>
+                    <option value="Brazil">🇧🇷 Brazil</option>
+                    <option value="Mexico">🇲🇽 Mexico</option>
+                    <option value="Argentina">🇦🇷 Argentina</option>
+                    <option value="Other">🌍 Other</option>
+                </select>
+                <span class="error-message" id="countryError"></span>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-paper-plane"></i>
+                <span>Create Account</span>
+                <div class="loading-spinner" id="loadingSpinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+            </button>
+        </form>
+
+        <div class="action-buttons">
+            <button class="view-users-btn" id="viewUsersBtn" onclick="viewUsers()">
+                <i class="fas fa-users"></i>
+                View All Users
+            </button>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <div class="success-content">
+                <i class="fas fa-check-circle"></i>
+                <h3>Welcome aboard!</h3>
+                <p>Your account has been created successfully.</p>
+                <div class="success-actions">
+                    <button class="view-users-btn" onclick="viewUsers()">
+                        <i class="fas fa-users"></i>
+                        View All Users
+                    </button>
+                    <button class="close-success-btn" onclick="closeSuccess()">
+                        <i class="fas fa-times"></i>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="users-list" id="usersList">
+            <div class="users-modal">
+                <div class="users-header">
+                    <h3>
+                        <i class="fas fa-users"></i>
+                        Registered Users
+                    </h3>
+                    <button class="close-btn" onclick="closeUsersList()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="users-content" id="usersContent">
+                    <!-- Users will be loaded here -->
+                </div>
+                <div class="users-footer">
+                    <p class="user-count" id="userCount">Total users: 0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
